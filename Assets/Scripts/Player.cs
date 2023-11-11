@@ -12,6 +12,15 @@ public class Player : MonoBehaviour
 
     Vector2 minBounds, maxBounds;
 
+    [SerializeField]
+    float paddingLeft=0.5f;
+    [SerializeField]
+    float paddingRight=0.5f;
+    [SerializeField]
+    float paddingTop = 5f;
+    [SerializeField]
+    float paddingBottom = 2f;
+
     void Start()
     {
         InitBounds();
@@ -32,8 +41,8 @@ public class Player : MonoBehaviour
     {
         Vector3 delta = rawInput * moveSpeed * Time.deltaTime;
         Vector2 newPos = new Vector2();
-        newPos.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x, maxBounds.x);
-        newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y, maxBounds.y);
+        newPos.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x + paddingLeft, maxBounds.x-paddingRight);
+        newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y+paddingBottom, maxBounds.y-paddingTop);
         transform.position = newPos;
     }
 
